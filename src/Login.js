@@ -2,23 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './login.css'
 
-// async function loginUser(credentials) {
-//     const data = {
-//         token: "randomToken"
-//     };
-//     console.log(
-//       fetch('http://localhost:2400/api/auth/login', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({email: "janek556677@interia.eu" ,password: "sda"})
-//       })
-//         .then(data => data.json())
-//     ) 
-//     if(credentials.username === "k123" && credentials.password === "k123") return data;
-//     else return -1;
-//    }
 
 async function loginUser(credentials) {
   return fetch('http://localhost:8080/login', {
@@ -27,8 +10,7 @@ async function loginUser(credentials) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(credentials)
-  })
-    .then(data => data.json())
+  }).then(data => data.json())
  }
 
 

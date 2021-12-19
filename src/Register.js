@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import './login.css'
 
 async function registerUser(credentials) {
-    if(credentials.username === "k123" && credentials.password === "k123") return "FAILURE";
-    else return "SUCCESS";
-    // return fetch('http://localhost:8080/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(credentials)
-    // })
-    //   .then(data => data.json())
+  console.log(credentials);
+    return fetch('http://localhost:2400/api/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(credentials)
+    })
+      .then(data => data.json())
    }
 
 export default function Register() {
-  const [username, setUserName] = useState();
+  const [login, setLogin] = useState();
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [passwordRepeat, setPasswordRepeat] = useState();
 
@@ -26,19 +26,11 @@ export default function Register() {
         return -1;
     }
     const response = await registerUser({
-      username,
+      login,
+      email,
       password
     });
-    if(response === "SUCCESS"){
-        errorMessage("SUCCESS");
-        setTimeout(function () {
-            window.location.assign("/login")
-        }, 5000);
-    }
-    // setToken(token);
-    // if(token === -1){
-    //     errorMessage();
-    // }
+    errorMessage(response.msg);
   }
 
   return(
@@ -46,7 +38,9 @@ export default function Register() {
       <h1>Rejestracja</h1>
       <form onSubmit={handleSubmit}>
           <label for="username">Login: </label><br />
-          <input type="text" id="username" onChange={e => setUserName(e.target.value)}/><br />
+          <input type="text" id="username" onChange={e => setLogin(e.target.value)}/><br />
+          <label for="email">Email: </label><br />
+          <input type="email" id="email" onChange={e => setEmail(e.target.value)}/><br />
           <label for="password">Hasło: </label><br />
           <input type="password" id="password" onChange={e => setPassword(e.target.value)}/><br />
           <label for="password">Powtórz hasło: </label><br />
@@ -68,7 +62,7 @@ export default function Register() {
           element.innerHTML = "Pomyślnie założono konto\n";
           break;
           default:
-          element.innerHTML = "Wystąpił błąd";
+          element.innerHTML = code;
       }
   }
 }

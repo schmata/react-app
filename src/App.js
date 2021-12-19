@@ -11,28 +11,6 @@ function Logout() {
   sessionStorage.removeItem('token');
   window.location.assign("/");
 }
-function Fetch() {
-
-    // fetch("http://localhost:2400/allow-cors", {
-    //   mode: 'cors',
-    //   method: 'GET',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    // },
-
-    // }).then(data => console.log(data))
-    fetch("http://localhost:2400/api/auth/signup", {
-      mode: 'cors',
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        "login": "admin",
-        "email": "admin@admin",
-        "password": "1233321"
-       })
-  }).then(response => response.json())
-  .then(data => console.log(data));
- }
 function App() {
 
   const { token, setToken } = useToken();
@@ -41,7 +19,6 @@ function App() {
     return (
     <div style={{margin: "auto"}}>
     <BrowserRouter>
-    <button onClick={Fetch}>Fetch</button>
     <div id="fetchtest"></div>
       <Link to="/register"><button>Rejestracja</button></Link><br />
       <Link to="/login"><button>Logowanie</button></Link>
