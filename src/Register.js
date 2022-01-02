@@ -3,7 +3,7 @@ import './login.css'
 
 async function registerUser(credentials) {
   console.log(credentials);
-    return fetch('http://localhost:2400/api/auth/signup', {
+    return fetch('http://localhost:2400/auth/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -38,13 +38,13 @@ export default function Register() {
       <h1>Rejestracja</h1>
       <form onSubmit={handleSubmit}>
           <label for="username">Login: </label><br />
-          <input type="text" id="username" onChange={e => setLogin(e.target.value)}/><br />
+          <input type="text" id="username" required onChange={e => setLogin(e.target.value)}/><br />
           <label for="email">Email: </label><br />
-          <input type="email" id="email" onChange={e => setEmail(e.target.value)}/><br />
+          <input type="email" id="email" required onChange={e => setEmail(e.target.value)}/><br />
           <label for="password">Hasło: </label><br />
-          <input type="password" id="password" onChange={e => setPassword(e.target.value)}/><br />
+          <input type="password" id="password" required onChange={e => setPassword(e.target.value)}/><br />
           <label for="password">Powtórz hasło: </label><br />
-          <input type="password" id="passwordRepeat" onChange={e => setPasswordRepeat(e.target.value)}/><br />
+          <input type="password" id="passwordRepeat" required onChange={e => setPasswordRepeat(e.target.value)}/><br />
           <button type="submit">Zarejestruj</button>
       </form>
       <p id="registerMessage">&nbsp;</p>
